@@ -1,0 +1,41 @@
+services:
+  controller:
+    image: m2n2/telemitz-controller:latest
+    restart: unless-stopped
+    command: python main.py
+    depends_on:
+      - livekit
+    environment:
+      BACKEND_URL: "${BACKEND_URL}"
+      REGISTRATION_TOKEN: "${REGISTRATION_TOKEN}"
+      SELF_DOMAIN: "${SELF_DOMAIN}"
+      LIVEKIT_API_KEY: "${LIVEKIT_API_KEY}"
+      LIVEKIT_API_SECRET: "${LIVEKIT_API_SECRET}"
+
+  nginx:
+    build:
+      dockerfile: nginx.Dockerfile
+    restart: unless-stopped
+    volumes:
+      - ssl_data:/etc/resty-auto-ssl
+      - cache_data:/var/cache/nginx/project_images_cache
+    ports:
+      - 80:80
+      - 443:443
+
+  livekit:
+    build:
+      dockerfile: livekit.Dockerfile
+    restart: unless-stopped
+    ports:
+      - "7880:7880"
+      - "7881:7881"
+      - "50000-50050:50000-50050/udp"
+    volumes:
+      - livekit_data:/etc/livekit
+    command: [ "--config", "/etc/livekit/config.yaml", "--node-ip=${SELF_DOMAIN}" ]
+
+volumes:
+  cache_data:
+  ssl_data:
+  livekit_data:
