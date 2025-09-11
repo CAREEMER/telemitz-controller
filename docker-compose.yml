@@ -29,7 +29,7 @@ services:
     ports:
       - "7880:7880"
       - "7881:7881"
-      - "50000-50050:50000-50500/udp"
+      - "50000-50500:50000-50500/udp"
     volumes:
       - ./livekit:/etc/livekit
     command: [ "--config", "/etc/livekit/config.yaml" ]
