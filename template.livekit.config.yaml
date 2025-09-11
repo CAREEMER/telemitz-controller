@@ -8,8 +8,9 @@ webhook:
     - ${BACKEND_URL}/api/v1/room/livekit/webhook/${BACKEND_LIVEKIT_WEBHOOK_ID}
 
 rtc:
+    node_ip: ${SELF_DOMAIN}
     port_range_start: 50000
-    port_range_end: 50050
+    port_range_end: 50500
     tcp_port: 7881
     use_external_ip: false
     enable_loopback_candidate: false
