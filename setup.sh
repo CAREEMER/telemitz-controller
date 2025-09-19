@@ -44,4 +44,6 @@ chmod +x run.sh
 echo "▶️  Starting application..."
 ./run.sh
 
+sudo chmod 777 livekit
+
 echo "🎉 Setup complete!"
