@@ -34,6 +34,18 @@ services:
       - ./livekit:/etc/livekit
     command: [ "--config", "/etc/livekit/config.yaml" ]
 
+#  onlogs:
+#    image: devforth/onlogs
+#    restart: always
+#    environment:
+#      - AGENT=true
+#      - HOST=<ONLOGS_HOST>
+#      - ONLOGS_TOKEN=<ONLOGS_TOKEN>
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
+#      - /etc/hostname:/etc/hostname
+#      - onlogs-volume:/leveldb
+
 volumes:
   cache_data:
   ssl_data:
