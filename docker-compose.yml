@@ -34,19 +34,23 @@ services:
       - ./livekit:/etc/livekit
     command: [ "--config", "/etc/livekit/config.yaml" ]
 
-  onlogs:
-    image: devforth/onlogs
-    restart: always
+  filebeat:
+    build:
+      dockerfile: filebeat.Dockerfile
+    hostname: ${HOSTNAME:-remote-server}
+    restart: unless-stopped
+    user: root
     environment:
-      - AGENT=true
-      - HOST=<ONLOGS_HOST>
-      - ONLOGS_TOKEN=<ONLOGS_TOKEN>
+      - ELASTICSEARCH_HOSTS=elastic_host
+      - ELASTICSEARCH_API_KEY=elastic_api_key
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /etc/hostname:/etc/hostname
-      - onlogs-volume:/leveldb
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - filebeat_data:/usr/share/filebeat/data
+    mem_limit: 256m
 
 volumes:
   cache_data:
   ssl_data:
   onlogs-volume:
+  filebeat_data:
