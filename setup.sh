@@ -38,6 +38,8 @@ except Exception as e:
     sys.exit(1)
 "
 
+mkdir livekit
+
 echo "🔧 Making run.sh executable..."
 chmod +x run.sh
 

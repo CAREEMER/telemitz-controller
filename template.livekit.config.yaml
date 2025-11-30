@@ -1,11 +1,15 @@
 port: 7880
 room:
+    max_participants: 0
     enable_remote_unmute: true
 
+redis:
+    address: redis:6379
+
 webhook:
-  api_key: ${LIVEKIT_API_KEY}
-  urls:
-    - ${BACKEND_URL}/api/v1/room/livekit/webhook/${BACKEND_LIVEKIT_WEBHOOK_ID}
+    api_key: ${LIVEKIT_API_KEY}
+    urls:
+        - ${BACKEND_URL}/api/v1/room/livekit/webhook/${BACKEND_LIVEKIT_WEBHOOK_ID}
 
 rtc:
     node_ip: ${SELF_DOMAIN}
@@ -14,6 +18,10 @@ rtc:
     tcp_port: 7881
     use_external_ip: true
     enable_loopback_candidate: false
+
+ingress:
+    rtmp_base_url: rtmp://${SELF_DOMAIN}:1935
+    whip_base_url: http://${SELF_DOMAIN}:8080
 
 keys:
     ${LIVEKIT_API_KEY}: ${LIVEKIT_API_SECRET}
