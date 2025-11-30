@@ -1,7 +1,6 @@
 port: 7880
 room:
     max_participants: 0
-    enable_remote_unmute: true
 
 redis:
     address: redis:6379
