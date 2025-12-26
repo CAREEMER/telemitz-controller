@@ -8,7 +8,7 @@ redis:
 webhook:
     api_key: ${LIVEKIT_API_KEY}
     urls:
-        - ${BACKEND_URL}/api/v1/room/livekit/webhook/${BACKEND_LIVEKIT_WEBHOOK_ID}
+        - ${BACKEND_URL}/api/v2/room/livekit/webhook/${BACKEND_LIVEKIT_WEBHOOK_ID}
 
 rtc:
     node_ip: ${SELF_DOMAIN}
